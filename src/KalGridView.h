@@ -31,6 +31,7 @@
 
 @property (nonatomic, readonly) BOOL transitioning;
 @property (nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, readonly) BOOL isShowingWeekView;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
 - (void)selectDate:(KalDate *)date;
@@ -41,8 +42,8 @@
 // has moved to the previous or following month.
 - (void)slideUp;
 - (void)slideDown;
-- (void)slideRight;
-- (void)slideLeft;
+- (void)showFollowingMonth;
+- (void)showPreviousMonth;
 - (void)jumpToSelectedMonth;    // see comment on KalView
 
 @end

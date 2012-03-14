@@ -55,8 +55,8 @@
 // *after* the KalLogic has moved to the month specified by the user.
 - (void)slideDown;
 - (void)slideUp;
-- (void)slideRight;
-- (void)slideLeft;
+- (void)showFollowingMonth;
+- (void)showPreviousMonth;
 - (void)jumpToSelectedMonth;    // change months without animation (i.e. when directly switching to "Today")
 
 @end

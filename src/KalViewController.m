@@ -105,7 +105,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
 	[self clearTable];
 	[logic retreatToPreviousMonth];
-	[[self calendarView] slideLeft];
+	[[self calendarView] showPreviousMonth];
 	[self reloadData];
 }
 
@@ -113,7 +113,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
 	[self clearTable];
 	[logic advanceToFollowingMonth];
-	[[self calendarView] slideRight];
+	[[self calendarView] showFollowingMonth];
 	[self reloadData];
 }
 

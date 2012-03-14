@@ -319,6 +319,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vinay Chavan (6HWYGLV7U8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vinay Chavan (6HWYGLV7U8)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -326,6 +328,8 @@
 				GCC_PREFIX_HEADER = Holiday_Prefix.pch;
 				INFOPLIST_FILE = "Holiday-Info.plist";
 				PRODUCT_NAME = Holiday;
+				PROVISIONING_PROFILE = "1976E068-C5EA-4B86-9528-B9B7EC6D1B0F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1976E068-C5EA-4B86-9528-B9B7EC6D1B0F";
 			};
 			name = Debug;
 		};
@@ -333,11 +337,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vinay Chavan (6HWYGLV7U8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vinay Chavan (6HWYGLV7U8)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Holiday_Prefix.pch;
 				INFOPLIST_FILE = "Holiday-Info.plist";
 				PRODUCT_NAME = Holiday;
+				PROVISIONING_PROFILE = "1976E068-C5EA-4B86-9528-B9B7EC6D1B0F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1976E068-C5EA-4B86-9528-B9B7EC6D1B0F";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

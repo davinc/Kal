@@ -216,8 +216,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)slideUp { [self slide:SLIDE_UP]; }
 - (void)slideDown { [self slide:SLIDE_DOWN]; }
-- (void)slideRight { [self slide:SLIDE_RIGHT]; }
-- (void)slideLeft { [self slide:SLIDE_LEFT]; }
+- (void)showFollowingMonth { if (!transitioning)[self slide:SLIDE_RIGHT]; }
+- (void)showPreviousMonth { if (!transitioning)[self slide:SLIDE_LEFT]; }
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
@@ -244,6 +244,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 {
 	[self slide:SLIDE_NONE];
 }
+
+- (BOOL)isShowingWeekView { return frontMonthView.isShowingWeekView; }
 
 - (void)markTilesForDates:(NSArray *)dates { [frontMonthView markTilesForDates:dates]; }
 

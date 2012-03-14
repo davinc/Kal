@@ -40,12 +40,12 @@ static const CGFloat kMonthLabelHeight = 17.f;
 		[self addSubviewsToContentView:contentView];
 		[self addSubview:contentView];
 		
-		UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showPreviousMonth)];
+		UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didPerformSwipeGesture:)];
 		swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
 		[self addGestureRecognizer:swipeLeft];
 		[swipeLeft release], swipeLeft = nil;
 		
-		UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showFollowingMonth)];
+		UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didPerformSwipeGesture:)];
 		swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
 		[self addGestureRecognizer:swipeRight];
 		[swipeRight release], swipeRight = nil;
@@ -64,19 +64,58 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
 - (void)slideDown { [gridView slideDown]; }
 - (void)slideUp { [gridView slideUp]; }
-- (void)slideLeft { [gridView slideLeft]; }
-- (void)slideRight { [gridView slideRight]; }
-
-- (void)showPreviousMonth
+- (void)showPreviousMonth 
 {
-	if (!gridView.transitioning)
-		[delegate showPreviousMonth];
+	[gridView showPreviousMonth]; 
 }
-
 - (void)showFollowingMonth
 {
-	if (!gridView.transitioning)
+	[gridView showFollowingMonth]; 
+}
+
+- (void)showPreviousWeek
+{
+	
+}
+
+- (void)showFollowingWeek
+{
+	
+}
+
+- (void)didTapPrevious:(id)sender
+{
+	if (!gridView.transitioning) {
+		[delegate showPreviousMonth];
+	}
+}
+
+- (void)didTapNext:(id)sender
+{
+	if (!gridView.transitioning) {
 		[delegate showFollowingMonth];
+	}
+}
+
+- (void)didPerformSwipeGesture:(UISwipeGestureRecognizer *)gestureRecognizer
+{
+	if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+		if (gridView.isShowingWeekView) {
+			[self showFollowingWeek];
+		}else {
+			if (!gridView.transitioning) {
+				[delegate showFollowingMonth];
+			}
+		}
+	}else if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+		if (gridView.isShowingWeekView) {
+			[self showPreviousWeek];
+		}else {
+			if (!gridView.transitioning) {
+				[delegate showPreviousMonth];
+			}
+		}
+	}
 }
 
 - (void)addSubviewsToHeaderView:(UIView *)headerView
@@ -93,20 +132,20 @@ static const CGFloat kMonthLabelHeight = 17.f;
 	backgroundView.frame = imageFrame;
 	[headerView addSubview:backgroundView];
 	[backgroundView release];
- 
-	  // Create the previous month button on the left side of the view
-	  CGRect previousMonthButtonFrame = CGRectMake(self.left,
-	                                               kHeaderVerticalAdjust,
-	                                               kChangeMonthButtonWidth,
-	                                               kChangeMonthButtonHeight);
-	  UIButton *previousMonthButton = [[UIButton alloc] initWithFrame:previousMonthButtonFrame];
-	  [previousMonthButton setImage:[UIImage imageNamed:@"Kal.bundle/kal_left_arrow.png"] forState:UIControlStateNormal];
-	  previousMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-	  previousMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	  [previousMonthButton addTarget:self action:@selector(showPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
-	  [headerView addSubview:previousMonthButton];
-	  [previousMonthButton release];
-	  
+	
+	// Create the previous month button on the left side of the view
+	CGRect previousMonthButtonFrame = CGRectMake(self.left,
+												 kHeaderVerticalAdjust,
+												 kChangeMonthButtonWidth,
+												 kChangeMonthButtonHeight);
+	UIButton *previousMonthButton = [[UIButton alloc] initWithFrame:previousMonthButtonFrame];
+	[previousMonthButton setImage:[UIImage imageNamed:@"Kal.bundle/kal_left_arrow.png"] forState:UIControlStateNormal];
+	previousMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	previousMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+	[previousMonthButton addTarget:self action:@selector(didTapPrevious:) forControlEvents:UIControlEventTouchUpInside];
+	[headerView addSubview:previousMonthButton];
+	[previousMonthButton release];
+	
 	// Draw the selected month name centered and at the top of the view
 	CGRect monthLabelFrame = CGRectMake((self.width - kMonthLabelWidth)/2.0f,
 										kHeaderVerticalAdjust,
@@ -121,19 +160,19 @@ static const CGFloat kMonthLabelHeight = 17.f;
 	headerTitleLabel.shadowOffset = CGSizeMake(0.f, 1.f);
 	[self setHeaderTitleText:[logic selectedMonthNameAndYear]];
 	[headerView addSubview:headerTitleLabel];
-	  
-	  // Create the next month button on the right side of the view
-	  CGRect nextMonthButtonFrame = CGRectMake(self.width - kChangeMonthButtonWidth,
-	                                           kHeaderVerticalAdjust,
-	                                           kChangeMonthButtonWidth,
-	                                           kChangeMonthButtonHeight);
-	  UIButton *nextMonthButton = [[UIButton alloc] initWithFrame:nextMonthButtonFrame];
-	  [nextMonthButton setImage:[UIImage imageNamed:@"Kal.bundle/kal_right_arrow.png"] forState:UIControlStateNormal];
-	  nextMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-	  nextMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	  [nextMonthButton addTarget:self action:@selector(showFollowingMonth) forControlEvents:UIControlEventTouchUpInside];
-	  [headerView addSubview:nextMonthButton];
-	  [nextMonthButton release];
+	
+	// Create the next month button on the right side of the view
+	CGRect nextMonthButtonFrame = CGRectMake(self.width - kChangeMonthButtonWidth,
+											 kHeaderVerticalAdjust,
+											 kChangeMonthButtonWidth,
+											 kChangeMonthButtonHeight);
+	UIButton *nextMonthButton = [[UIButton alloc] initWithFrame:nextMonthButtonFrame];
+	[nextMonthButton setImage:[UIImage imageNamed:@"Kal.bundle/kal_right_arrow.png"] forState:UIControlStateNormal];
+	nextMonthButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+	nextMonthButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+	[nextMonthButton addTarget:self action:@selector(didTapNext:) forControlEvents:UIControlEventTouchUpInside];
+	[headerView addSubview:nextMonthButton];
+	[nextMonthButton release];
 	
 	// Add column labels for each weekday (adjusting based on the current locale's first weekday)
 	NSArray *weekdayNames = [[[[NSDateFormatter alloc] init] autorelease] shortWeekdaySymbols];
