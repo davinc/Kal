@@ -39,16 +39,16 @@
  */
 @interface KalView : UIView
 {
-  UILabel *headerTitleLabel;
-  KalGridView *gridView;
-  UITableView *tableView;
-  UIImageView *shadowView;
-  id<KalViewDelegate> delegate;
-  KalLogic *logic;
+	UILabel *headerTitleLabel;
+	KalGridView *gridView;
+//	UITableView *tableView;
+	UIImageView *shadowView;
+	id<KalViewDelegate> delegate;
+	KalLogic *logic;
 }
 
 @property (nonatomic, assign) id<KalViewDelegate> delegate;
-@property (nonatomic, readonly) UITableView *tableView;
+//@property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, readonly) KalDate *selectedDate;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
@@ -61,6 +61,8 @@
 // *after* the KalLogic has moved to the month specified by the user.
 - (void)slideDown;
 - (void)slideUp;
+- (void)slideRight;
+- (void)slideLeft;
 - (void)jumpToSelectedMonth;    // change months without animation (i.e. when directly switching to "Today")
 
 @end

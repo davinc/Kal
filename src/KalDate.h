@@ -7,11 +7,11 @@
 
 @interface KalDate : NSObject
 {
-  struct {
-    unsigned int month : 4;
-    unsigned int day : 5;
-    unsigned int year : 15;
-  } a;
+	struct {
+		unsigned int month : 4;
+		unsigned int day : 5;
+		unsigned int year : 15;
+	} a;
 }
 
 + (KalDate *)dateForDay:(unsigned int)day month:(unsigned int)month year:(unsigned int)year;

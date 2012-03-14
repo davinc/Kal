@@ -5,7 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class KalTileView, KalMonthView, KalLogic, KalDate;
+@class KalDayTileView, KalWeekView, KalMonthView, KalLogic, KalDate;
 @protocol KalViewDelegate;
 
 /*
@@ -20,13 +20,13 @@
  */
 @interface KalGridView : UIView
 {
-  id<KalViewDelegate> delegate;  // Assigned.
-  KalLogic *logic;
-  KalMonthView *frontMonthView;
-  KalMonthView *backMonthView;
-  KalTileView *selectedTile;
-  KalTileView *highlightedTile;
-  BOOL transitioning;
+	id<KalViewDelegate> delegate;  // Assigned.
+	KalLogic *logic;
+	KalMonthView *frontMonthView;
+	KalMonthView *backMonthView;
+	//  KalTileView *selectedTile;
+	//  KalTileView *highlightedTile;
+	BOOL transitioning;
 }
 
 @property (nonatomic, readonly) BOOL transitioning;
@@ -40,6 +40,8 @@
 // has moved to the previous or following month.
 - (void)slideUp;
 - (void)slideDown;
+- (void)slideRight;
+- (void)slideLeft;
 - (void)jumpToSelectedMonth;    // see comment on KalView
 
 @end

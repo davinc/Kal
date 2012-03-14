@@ -22,13 +22,13 @@
  */
 @interface KalLogic : NSObject
 {
-  NSDate *baseDate;
-  NSDate *fromDate;
-  NSDate *toDate;
-  NSArray *daysInSelectedMonth;
-  NSArray *daysInFinalWeekOfPreviousMonth;
-  NSArray *daysInFirstWeekOfFollowingMonth;
-  NSDateFormatter *monthAndYearFormatter;
+	NSDate *baseDate;
+	NSDate *fromDate;
+	NSDate *toDate;
+	NSArray *daysInSelectedMonth;
+	NSArray *daysInFinalWeekOfPreviousMonth;
+	NSArray *daysInFirstWeekOfFollowingMonth;
+	NSDateFormatter *monthAndYearFormatter;
 }
 
 @property (nonatomic, retain) NSDate *baseDate;    // The first day of the currently selected month

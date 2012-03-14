@@ -5,19 +5,22 @@
 
 #import <UIKit/UIKit.h>
 
-@class KalTileView, KalDate;
+@class KalWeekView, KalDayTileView, KalWeekTileView, KalDate;
 
 @interface KalMonthView : UIView
 {
-  NSUInteger numWeeks;
+	NSUInteger numWeeks;
+	BOOL isShowingWeekView;
 }
 
-@property (nonatomic) NSUInteger numWeeks;
+@property (nonatomic) BOOL isShowingWeekView;
 
-- (id)initWithFrame:(CGRect)rect; // designated initializer
 - (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *)trailingAdjacentDates;
-- (KalTileView *)firstTileOfMonth;
-- (KalTileView *)tileForDate:(KalDate *)date;
+- (KalDayTileView *)firstTileOfMonth;
+- (KalDayTileView *)tileForDate:(KalDate *)date;
 - (void)markTilesForDates:(NSArray *)dates;
+
+- (void)showWeekViewForWeekAtIndex:(NSInteger)index;
+- (void)hideWeekView;
 
 @end
