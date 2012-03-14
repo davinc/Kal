@@ -23,7 +23,7 @@
 
 @implementation KalLogic
 
-@synthesize baseDate, fromDate, toDate, daysInSelectedMonth, daysInFinalWeekOfPreviousMonth, daysInFirstWeekOfFollowingMonth;
+@synthesize baseDate, fromDate, toDate, daysInSelectedMonth, daysInFinalWeekOfPreviousMonth, daysInFirstWeekOfFollowingMonth, daysInSelectedWeek, daysInFinalWeekOfPreviousWeek, daysInFirstWeekOfFollowingWeek;
 
 + (NSSet *)keyPathsForValuesAffectingSelectedMonthNameAndYear
 {
@@ -142,6 +142,9 @@
 	[daysInSelectedMonth release];
 	[daysInFinalWeekOfPreviousMonth release];
 	[daysInFirstWeekOfFollowingMonth release];
+	[daysInSelectedWeek release];
+	[daysInFinalWeekOfPreviousWeek release];
+	[daysInFirstWeekOfFollowingWeek release];
 	[super dealloc];
 }
 

@@ -37,6 +37,9 @@
 @property (nonatomic, retain, readonly) NSArray *daysInSelectedMonth;             // array of KalDate
 @property (nonatomic, retain, readonly) NSArray *daysInFinalWeekOfPreviousMonth;  // array of KalDate
 @property (nonatomic, retain, readonly) NSArray *daysInFirstWeekOfFollowingMonth; // array of KalDate
+@property (nonatomic, retain, readonly) NSArray *daysInSelectedWeek;             // array of KalDate
+@property (nonatomic, retain, readonly) NSArray *daysInFinalWeekOfPreviousWeek;  // array of KalDate
+@property (nonatomic, retain, readonly) NSArray *daysInFirstWeekOfFollowingWeek; // array of KalDate
 @property (nonatomic, readonly) NSString *selectedMonthNameAndYear; // localized (e.g. "September 2010" for USA locale)
 
 - (id)initForDate:(NSDate *)date; // designated initializer.

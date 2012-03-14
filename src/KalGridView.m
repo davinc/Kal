@@ -194,7 +194,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 - (void)slide:(int)direction
 {
 	transitioning = YES;
-	backMonthView.isShowingWeekView = NO;
+//	backMonthView.isShowingWeekView = NO;
 	[backMonthView showDates:logic.daysInSelectedMonth
 		leadingAdjacentDates:logic.daysInFinalWeekOfPreviousMonth
 	   trailingAdjacentDates:logic.daysInFirstWeekOfFollowingMonth];
