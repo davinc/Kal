@@ -166,8 +166,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 		backMonthView.left = -frontMonthView.width;
 	} else if (direction == SLIDE_RIGHT) {
 		backMonthView.left = frontMonthView.width;
-	} else {
-		backMonthView.top = 0.f;
 	}
 	
 	// trigger the slide animation
@@ -214,10 +212,27 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 	//  self.selectedTile = [frontMonthView firstTileOfMonth];
 }
 
-- (void)slideUp { [self slide:SLIDE_UP]; }
-- (void)slideDown { [self slide:SLIDE_DOWN]; }
-- (void)showFollowingMonth { if (!transitioning)[self slide:SLIDE_RIGHT]; }
-- (void)showPreviousMonth { if (!transitioning)[self slide:SLIDE_LEFT]; }
+- (void)showPreviousWeek
+{
+	[frontMonthView showPreviousWeek];
+}
+
+- (void)showFollowingWeek
+{
+	[frontMonthView showFollowingWeek];
+}
+
+- (void)showFollowingMonth
+{
+	if (!transitioning)
+		[self slide:SLIDE_RIGHT]; 
+}
+
+- (void)showPreviousMonth 
+{ 
+	if (!transitioning)
+		[self slide:SLIDE_LEFT]; 
+}
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {

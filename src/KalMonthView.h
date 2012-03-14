@@ -11,6 +11,7 @@
 {
 	NSUInteger numWeeks;
 	BOOL isShowingWeekView;
+	NSInteger showingWeekOfMonth;
 }
 
 @property (nonatomic) BOOL isShowingWeekView;
@@ -23,5 +24,7 @@
 
 - (void)showWeekViewForWeekAtIndex:(NSInteger)index;
 - (void)hideWeekView;
+- (void)showPreviousWeek;
+- (void)showFollowingWeek;
 
 @end

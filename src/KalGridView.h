@@ -40,8 +40,8 @@
 
 // These 3 methods should be called *after* the KalLogic
 // has moved to the previous or following month.
-- (void)slideUp;
-- (void)slideDown;
+- (void)showPreviousWeek;
+- (void)showFollowingWeek;
 - (void)showFollowingMonth;
 - (void)showPreviousMonth;
 - (void)jumpToSelectedMonth;    // see comment on KalView

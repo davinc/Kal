@@ -40,29 +40,6 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
   return [items objectAtIndex:indexPath.row];
 }
 
-#pragma mark UITableViewDataSource protocol conformance
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  static NSString *identifier = @"MyCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-  if (!cell) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-  }
-
-  Holiday *holiday = [self holidayAtIndexPath:indexPath];
-  cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"flags/%@.gif", holiday.country]];
-  cell.textLabel.text = holiday.name;
-  return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  return [items count];
-}
-
 #pragma mark Fetch from the internet
 
 - (void)fetchHolidays
@@ -134,6 +111,11 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
     return [NSArray array];
   
   return [[self holidaysFrom:fromDate to:toDate] valueForKeyPath:@"date"];
+}
+
+- (NSArray *)dayAnnotationsFrom:(NSDate *)fromDate to:(NSDate *)toDate
+{
+	return nil;
 }
 
 - (void)loadItemsFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate

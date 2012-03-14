@@ -62,8 +62,6 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
 - (void)redrawEntireMonth { [self jumpToSelectedMonth]; }
 
-- (void)slideDown { [gridView slideDown]; }
-- (void)slideUp { [gridView slideUp]; }
 - (void)showPreviousMonth 
 {
 	[gridView showPreviousMonth]; 
@@ -75,12 +73,12 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
 - (void)showPreviousWeek
 {
-	
+	[gridView showPreviousWeek];
 }
 
 - (void)showFollowingWeek
 {
-	
+	[gridView showFollowingWeek];
 }
 
 - (void)didTapPrevious:(id)sender

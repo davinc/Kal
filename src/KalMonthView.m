@@ -157,6 +157,7 @@
 	
 	[UIView commitAnimations];
 	
+	showingWeekOfMonth = index;
 	self.isShowingWeekView = YES;
 }
 
@@ -171,4 +172,17 @@
 	[UIView commitAnimations];
 }
 
+- (void)showPreviousWeek
+{
+	if (0 < showingWeekOfMonth) {
+		[self showWeekViewForWeekAtIndex:showingWeekOfMonth-1];
+	}
+}
+
+- (void)showFollowingWeek
+{
+	if (showingWeekOfMonth < numWeeks-1) {
+		[self showWeekViewForWeekAtIndex:showingWeekOfMonth+1];
+	}
+}
 @end
