@@ -20,7 +20,6 @@ static const CGFloat kMonthLabelHeight = 17.f;
 @implementation KalView
 
 @synthesize delegate;
-//@synthesize tableView;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)theDelegate logic:(KalLogic *)theLogic
 {
@@ -167,17 +166,6 @@ static const CGFloat kMonthLabelHeight = 17.f;
 	[gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
 	[contentView addSubview:gridView];
 	
-	// The list of events for the selected day
-//	tableView = [[UITableView alloc] initWithFrame:fullWidthAutomaticLayoutFrame style:UITableViewStylePlain];
-//	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//	[contentView addSubview:tableView];
-	
-	// Drop shadow below tile grid and over the list of events for the selected day
-//	shadowView = [[UIImageView alloc] initWithFrame:fullWidthAutomaticLayoutFrame];
-//	shadowView.image = [UIImage imageNamed:@"Kal.bundle/kal_grid_shadow.png"];
-//	shadowView.height = shadowView.image.size.height;
-//	[contentView addSubview:shadowView];
-	
 	// Trigger the initial KVO update to finish the contentView layout
 	[gridView sizeToFit];
 }
@@ -196,12 +184,6 @@ static const CGFloat kMonthLabelHeight = 17.f;
 		 * tableView here, I do not need to wrap it in a
 		 * [UIView beginAnimations:context:].
 		 */
-//		CGFloat gridBottom = gridView.top + gridView.height;
-//		CGRect frame = tableView.frame;
-//		frame.origin.y = gridBottom;
-//		frame.size.height = tableView.superview.height - gridBottom;
-//		tableView.frame = frame;
-//		shadowView.top = gridBottom;
 		
 	} else if ([keyPath isEqualToString:@"selectedMonthNameAndYear"]) {
 		[self setHeaderTitleText:[change objectForKey:NSKeyValueChangeNewKey]];
@@ -236,8 +218,6 @@ static const CGFloat kMonthLabelHeight = 17.f;
 	[headerTitleLabel release];
 	[gridView removeObserver:self forKeyPath:@"frame"];
 	[gridView release];
-//	[tableView release];
-	[shadowView release];
 	[super dealloc];
 }
 

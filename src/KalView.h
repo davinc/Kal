@@ -31,24 +31,17 @@
  *       |                                         |
  *       |                                         |
  *       +-----------------------------------------+
- *       |                                         |
- *       |           table view (events)           |
- *       |                                         |
- *       +-----------------------------------------+
  *
  */
 @interface KalView : UIView
 {
 	UILabel *headerTitleLabel;
 	KalGridView *gridView;
-//	UITableView *tableView;
-	UIImageView *shadowView;
 	id<KalViewDelegate> delegate;
 	KalLogic *logic;
 }
 
 @property (nonatomic, assign) id<KalViewDelegate> delegate;
-//@property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, readonly) KalDate *selectedDate;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;

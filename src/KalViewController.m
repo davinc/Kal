@@ -63,7 +63,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
 	if (dataSource != aDataSource) {
 		dataSource = aDataSource;
-		tableView.dataSource = dataSource;
 	}
 }
 
@@ -71,14 +70,12 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
 	if (delegate != aDelegate) {
 		delegate = aDelegate;
-		tableView.delegate = delegate;
 	}
 }
 
 - (void)clearTable
 {
 	[dataSource removeAllItems];
-	[tableView reloadData];
 }
 
 - (void)reloadData
@@ -102,8 +99,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 	NSDate *to = [[date NSDate] cc_dateByMovingToEndOfDay];
 	[self clearTable];
 	[dataSource loadItemsFromDate:from toDate:to];
-	[tableView reloadData];
-	[tableView flashScrollIndicators];
 }
 
 - (void)showPreviousMonth
@@ -185,10 +180,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 		self.title = @"Calendar";
 	KalView *kalView = [[[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic] autorelease];
 	self.view = kalView;
-//	tableView = kalView.tableView;
-	tableView.dataSource = dataSource;
-	tableView.delegate = delegate;
-	[tableView retain];
 	[kalView selectDate:[KalDate dateFromNSDate:self.initialDate]];
 	[self reloadData];
 }
@@ -196,20 +187,16 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 - (void)viewDidUnload
 {
 	[super viewDidUnload];
-	[tableView release];
-	tableView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[tableView flashScrollIndicators];
 }
 
 #pragma mark -
@@ -221,7 +208,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 	[initialDate release];
 	[selectedDate release];
 	[logic release];
-	[tableView release];
 	[super dealloc];
 }
 
