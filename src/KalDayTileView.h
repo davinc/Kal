@@ -13,12 +13,15 @@ enum {
 typedef char KalTileType;
 
 @class KalDate;
+@class KalAnnotationView;
+@class KalDayAnnotations;
 
 @interface KalDayTileView : UIView
 {
 	KalDate *date;
 	UIImageView *backgroundImageView;
 	UILabel *dateLabel;
+	KalAnnotationView *annotationView;
 	struct {
 		unsigned int selected : 1;
 		unsigned int highlighted : 1;
@@ -34,6 +37,7 @@ typedef char KalTileType;
 @property (nonatomic) KalTileType type;
 
 - (void)resetState;
+- (void)setDayAnnotations:(KalDayAnnotations *)annotations;
 - (BOOL)isToday;
 - (BOOL)belongsToAdjacentMonth;
 

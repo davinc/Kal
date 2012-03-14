@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		456EDD581510862A006BA594 /* KalDayAnnotations.h in Headers */ = {isa = PBXBuildFile; fileRef = 456EDD561510862A006BA594 /* KalDayAnnotations.h */; };
+		456EDD591510862A006BA594 /* KalDayAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 456EDD571510862A006BA594 /* KalDayAnnotations.m */; };
+		456EDD5D1510863B006BA594 /* KalAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 456EDD5B1510863B006BA594 /* KalAnnotation.h */; };
+		456EDD5E1510863B006BA594 /* KalAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 456EDD5C1510863B006BA594 /* KalAnnotation.m */; };
+		456EDD651510891F006BA594 /* KalAnnotationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 456EDD631510891F006BA594 /* KalAnnotationView.h */; };
+		456EDD661510891F006BA594 /* KalAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 456EDD641510891F006BA594 /* KalAnnotationView.m */; };
 		458E6496150F517A00C6522C /* KalWeekView.h in Headers */ = {isa = PBXBuildFile; fileRef = 458E6494150F517A00C6522C /* KalWeekView.h */; };
 		458E6497150F517A00C6522C /* KalWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 458E6495150F517A00C6522C /* KalWeekView.m */; };
 		533B287611E2D46E00B3CC07 /* Kal.h in Headers */ = {isa = PBXBuildFile; fileRef = 533B286011E2D46E00B3CC07 /* Kal.h */; };
@@ -36,6 +42,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		456EDD561510862A006BA594 /* KalDayAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalDayAnnotations.h; sourceTree = "<group>"; };
+		456EDD571510862A006BA594 /* KalDayAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalDayAnnotations.m; sourceTree = "<group>"; };
+		456EDD5B1510863B006BA594 /* KalAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalAnnotation.h; sourceTree = "<group>"; };
+		456EDD5C1510863B006BA594 /* KalAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalAnnotation.m; sourceTree = "<group>"; };
+		456EDD631510891F006BA594 /* KalAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalAnnotationView.h; sourceTree = "<group>"; };
+		456EDD641510891F006BA594 /* KalAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalAnnotationView.m; sourceTree = "<group>"; };
 		458E6494150F517A00C6522C /* KalWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalWeekView.h; sourceTree = "<group>"; };
 		458E6495150F517A00C6522C /* KalWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalWeekView.m; sourceTree = "<group>"; };
 		533B285F11E2D46E00B3CC07 /* Kal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Kal.bundle; sourceTree = "<group>"; };
@@ -130,6 +142,12 @@
 				533B286F11E2D46E00B3CC07 /* KalView.m */,
 				533B287011E2D46E00B3CC07 /* KalViewController.h */,
 				533B287111E2D46E00B3CC07 /* KalViewController.m */,
+				456EDD631510891F006BA594 /* KalAnnotationView.h */,
+				456EDD641510891F006BA594 /* KalAnnotationView.m */,
+				456EDD561510862A006BA594 /* KalDayAnnotations.h */,
+				456EDD571510862A006BA594 /* KalDayAnnotations.m */,
+				456EDD5B1510863B006BA594 /* KalAnnotation.h */,
+				456EDD5C1510863B006BA594 /* KalAnnotation.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -174,6 +192,9 @@
 				533B288811E2D46E00B3CC07 /* NSDateAdditions.h in Headers */,
 				533B288A11E2D46E00B3CC07 /* UIViewAdditions.h in Headers */,
 				458E6496150F517A00C6522C /* KalWeekView.h in Headers */,
+				456EDD581510862A006BA594 /* KalDayAnnotations.h in Headers */,
+				456EDD5D1510863B006BA594 /* KalAnnotation.h in Headers */,
+				456EDD651510891F006BA594 /* KalAnnotationView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +259,9 @@
 				533B288911E2D46E00B3CC07 /* NSDateAdditions.m in Sources */,
 				533B288B11E2D46E00B3CC07 /* UIViewAdditions.m in Sources */,
 				458E6497150F517A00C6522C /* KalWeekView.m in Sources */,
+				456EDD591510862A006BA594 /* KalDayAnnotations.m in Sources */,
+				456EDD5E1510863B006BA594 /* KalAnnotation.m in Sources */,
+				456EDD661510891F006BA594 /* KalAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

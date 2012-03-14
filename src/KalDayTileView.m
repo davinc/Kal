@@ -6,6 +6,8 @@
 #import "KalDayTileView.h"
 #import "KalDate.h"
 #import "KalPrivate.h"
+#import "KalAnnotationView.h"
+#import "KalDayAnnotations.h"
 
 @interface KalDayTileView ()
 
@@ -23,11 +25,15 @@
 		self.opaque = NO;
 		self.backgroundColor = [UIColor clearColor];
 		self.clipsToBounds = NO;
+		self.contentMode = UIViewContentModeRedraw;
 		[self resetState];
 
 		backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
 		[self addSubview:backgroundImageView];
 
+		annotationView = [[KalAnnotationView alloc] initWithFrame:CGRectZero];
+		[self addSubview:annotationView];
+		
 		dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(3, 1, frame.size.width-3, 15)];
 		dateLabel.font = [UIFont boldSystemFontOfSize:12.f];
 		dateLabel.backgroundColor = [UIColor clearColor];
@@ -52,7 +58,10 @@
 - (void)layoutSubviews
 {
 	backgroundImageView.frame = self.bounds;
+	annotationView.frame = CGRectMake(5, 15, self.bounds.size.width - 10, self.bounds.size.height - 20);
 	dateLabel.frame = CGRectMake(3, 1, self.bounds.size.width-3, 15);
+	
+	[annotationView setNeedsDisplay];
 }
 
 - (void)updateStyle
@@ -142,6 +151,12 @@
 	[self updateStyle];
 }
 
+- (void)setDayAnnotations:(KalDayAnnotations *)annotations
+{
+	// set annotations for view
+	annotationView.annotations = annotations;
+}
+
 - (BOOL)isToday { return flags.type == KalTileTypeToday; }
 
 - (BOOL)belongsToAdjacentMonth { return flags.type == KalTileTypeAdjacent; }
@@ -151,6 +166,7 @@
 	[date release];
 	[dateLabel release];
 	[backgroundImageView release];
+	[annotationView release];
 	[super dealloc];
 }
 

@@ -38,28 +38,28 @@ static BOOL IsDateBetweenInclusive(NSDate *date, NSDate *begin, NSDate *end)
   return [items objectAtIndex:indexPath.row];
 }
 
-#pragma mark UITableViewDataSource protocol conformance
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  static NSString *identifier = @"MyCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-  if (!cell) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-  }
-  
-  Holiday *holiday = [self holidayAtIndexPath:indexPath];
-  cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"flags/%@.gif", holiday.country]];
-  cell.textLabel.text = holiday.name;
-  return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  return [items count];
-}
+//#pragma mark UITableViewDataSource protocol conformance
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//  static NSString *identifier = @"MyCell";
+//  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//  if (!cell) {
+//    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//  }
+//  
+//  Holiday *holiday = [self holidayAtIndexPath:indexPath];
+//  cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"flags/%@.gif", holiday.country]];
+//  cell.textLabel.text = holiday.name;
+//  return cell;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//  return [items count];
+//}
 
 #pragma mark Sqlite access
 

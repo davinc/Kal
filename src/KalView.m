@@ -167,7 +167,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
 	[contentView addSubview:gridView];
 	
 	// Trigger the initial KVO update to finish the contentView layout
-	[gridView sizeToFit];
+//	[gridView sizeToFit];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

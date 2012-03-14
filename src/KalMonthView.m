@@ -10,6 +10,8 @@
 #import "KalView.h"
 #import "KalDate.h"
 #import "KalPrivate.h"
+#import "KalDayAnnotations.h"
+#import "KalAnnotation.h"
 
 @implementation KalMonthView
 
@@ -123,6 +125,17 @@
 //			tile.marked = [dates containsObject:tile.date];
 //		}
 //	}
+}
+
+- (void)markTilesWithAnnoatations:(NSArray *)annotationsList
+{
+	// annotation list will be array of array, each day will get an array
+	for (KalDayAnnotations *dayAnnotations in annotationsList) {
+		KalDayTileView *tile = [self tileForDate:dayAnnotations.date];
+		if (tile) {
+			[tile setDayAnnotations:dayAnnotations];
+		}
+	}
 }
 
 - (void)showWeekViewForWeekAtIndex:(NSInteger)index
