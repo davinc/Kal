@@ -126,8 +126,10 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 	NSMutableArray *dates = [[markedDates mutableCopy] autorelease];
 	for (int i=0; i<[dates count]; i++)
 		[dates replaceObjectAtIndex:i withObject:[KalDate dateFromNSDate:[dates objectAtIndex:i]]];
-	
 	[[self calendarView] markTilesForDates:dates];
+	
+	NSArray *dayAnnotations = [theDataSource dayAnnotationsFrom:logic.fromDate to:logic.toDate];
+	[[self calendarView] markTilesWithAnnoatations:dayAnnotations];
 	[self didSelectDate:self.calendarView.selectedDate];
 }
 

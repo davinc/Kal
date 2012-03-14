@@ -154,7 +154,8 @@
 - (void)setDayAnnotations:(KalDayAnnotations *)annotations
 {
 	// set annotations for view
-	annotationView.annotations = annotations;
+	annotationView.dayAnnotations = annotations;
+	[annotationView setNeedsDisplay];
 }
 
 - (BOOL)isToday { return flags.type == KalTileTypeToday; }

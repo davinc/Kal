@@ -136,6 +136,7 @@
 			[tile setDayAnnotations:dayAnnotations];
 		}
 	}
+	[self setNeedsLayout];
 }
 
 - (void)showWeekViewForWeekAtIndex:(NSInteger)index

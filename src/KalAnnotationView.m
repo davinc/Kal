@@ -9,10 +9,57 @@
 #import "KalAnnotationView.h"
 #import "KalDayAnnotations.h"
 #import "KalAnnotation.h"
+#import "KalDate.h"
 
 @implementation KalAnnotationView
 
-@synthesize annotations;
+@synthesize dayAnnotations;
+
+//float randFloat(void) {
+//    return rand()/(float)RAND_MAX;
+//}
+//- (KalDayAnnotations *)annotationsForDate:(NSDate *)date
+//{
+//	KalDayAnnotations *dayAnnotation = [[KalDayAnnotations alloc] init];
+//	dayAnnotation.date = [KalDate dateFromNSDate:date];
+//	
+//	int numberAnnotations = arc4random() % 10;
+//    if (numberAnnotations < 1) {
+//		//        return nil;
+//    }
+//    NSMutableArray * annotations = [NSMutableArray array];
+//    float totalPercentUsed = 0;
+//    for (int i = 0; i < numberAnnotations; i++) {
+//        KalAnnotation * annotation = [[KalAnnotation alloc] init];
+//        [annotations addObject:annotation];
+//        
+//        int r = (arc4random() % 100);
+//        annotation.isBorderDashed = r > 50;
+//		
+//        float bgR = randFloat();
+//        float bgG = randFloat();
+//        float bgB = randFloat();
+//        annotation.backgroundColour = [UIColor colorWithRed:bgR green:bgG blue:bgB alpha:annotation.isBorderDashed ? 0.2 : 1];
+//        annotation.borderColour = annotation.isBorderDashed ? [UIColor colorWithRed:randFloat() green:randFloat() blue:randFloat() alpha:1] : [UIColor clearColor];
+//        annotation.borderWidth = annotation.isBorderDashed ? arc4random() % 4 : 0;
+//        
+//        float percentToUse = randFloat();
+//        if (percentToUse + totalPercentUsed > 1.f)
+//            percentToUse = 1.f - totalPercentUsed;
+//        annotation.percentOfDay = percentToUse;        
+//		
+//        totalPercentUsed += percentToUse;
+//        NSLog(@"\t%.1f%% of day with bg %.0f %.0f %.0f   border %.1fpx    Dashed? %@   Total now: %.1f%%", (annotation.percentOfDay * 100), bgR * 255, bgG * 255, bgB * 255, annotation.borderWidth, annotation.isBorderDashed ? @"Yes" : @"No", totalPercentUsed * 100);
+//		
+//		[annotation release];
+//		annotation = nil;
+//		if (totalPercentUsed >= 1.f)
+//            break;
+//    }
+//	dayAnnotation.annotations = annotations;
+//	
+//	return [dayAnnotation autorelease];
+//}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -23,38 +70,7 @@
 		self.backgroundColor = [UIColor clearColor];
 		self.clipsToBounds = YES;
 		
-		NSMutableArray *array = [NSMutableArray array];
-
-		KalAnnotation *annotation = nil;
-		annotation = [[KalAnnotation alloc] init];
-		annotation.percentOfDay = rand()/(float)RAND_MAX;
-		annotation.backgroundColour = [UIColor colorWithRed:rand()/(float)RAND_MAX
-													  green:rand()/(float)RAND_MAX
-													   blue:rand()/(float)RAND_MAX
-													  alpha:1.0];
-		[array addObject:annotation];
-		[annotation release];
-		
-		annotation = [[KalAnnotation alloc] init];
-		annotation.percentOfDay = rand()/(float)RAND_MAX;
-		annotation.backgroundColour = [UIColor colorWithRed:rand()/(float)RAND_MAX
-													  green:rand()/(float)RAND_MAX
-													   blue:rand()/(float)RAND_MAX
-													  alpha:1.0];
-		[array addObject:annotation];
-		[annotation release];
-		
-		annotation = [[KalAnnotation alloc] init];
-		annotation.percentOfDay = rand()/(float)RAND_MAX;
-		annotation.backgroundColour = [UIColor colorWithRed:rand()/(float)RAND_MAX
-													  green:rand()/(float)RAND_MAX
-													   blue:rand()/(float)RAND_MAX
-													  alpha:1.0];
-		[array addObject:annotation];
-		[annotation release];
-		
-		annotations = [[KalDayAnnotations alloc] init];
-		annotations.annotations = array;
+//		self.dayAnnotations = [self annotationsForDate:nil];
     }
     return self;
 }
@@ -64,12 +80,10 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-	NSLog(@"Drawing annotations...");
-	
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	float totalPercentage = 0;
 	float currentY = 0;
-	for (KalAnnotation *annotation in annotations.annotations) {
+	for (KalAnnotation *annotation in dayAnnotations.annotations) {
 		float percentage = annotation.percentOfDay;
 		float height = self.bounds.size.height * percentage;
 		
@@ -93,7 +107,7 @@
 
 - (void)dealloc
 {
-	[annotations release];
+	[dayAnnotations release];
 	[super dealloc];
 }
 

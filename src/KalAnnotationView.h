@@ -12,9 +12,9 @@
 
 @interface KalAnnotationView : UIView
 {
-	KalDayAnnotations *annotations;
+	KalDayAnnotations *dayAnnotations;
 }
 
-@property (nonatomic, retain) KalDayAnnotations *annotations;
+@property (nonatomic, retain) KalDayAnnotations *dayAnnotations;
 
 @end

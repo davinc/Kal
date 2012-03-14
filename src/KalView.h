@@ -48,6 +48,7 @@
 - (BOOL)isSliding;
 - (void)selectDate:(KalDate *)date;
 - (void)markTilesForDates:(NSArray *)dates;
+- (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 - (void)redrawEntireMonth;
 
 // These 3 methods are exposed for the delegate. They should be called 
