@@ -117,6 +117,22 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 	[self reloadData];
 }
 
+- (void)showPreviousWeek
+{
+	[self clearTable];
+	[logic retreatToPreviousWeek];
+	[[self calendarView] showPreviousWeek];
+	[self reloadData];
+}
+
+- (void)showFollowingWeek
+{
+	[self clearTable];
+	[logic advanceToFollowingWeek];
+	[[self calendarView] showFollowingWeek];
+	[self reloadData];
+}
+
 // -----------------------------------------
 #pragma mark KalDataSourceCallbacks protocol
 

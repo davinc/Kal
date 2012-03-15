@@ -146,8 +146,10 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 		// show that week
 		
 		if (frontMonthView.isShowingWeekView) {
+			logic.logicMode = KalLogicMonthMode;
 			[frontMonthView hideWeekView];
 		}else {
+			logic.logicMode = KalLogicWeekMode;
 			[frontMonthView showWeekViewForWeekAtIndex:weekView.weekIndex];
 		}
 	}
@@ -194,7 +196,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 - (void)slide:(int)direction
 {
 	transitioning = YES;
-//	backMonthView.isShowingWeekView = NO;
+	backMonthView.isShowingWeekView = frontMonthView.isShowingWeekView;
 	[backMonthView showDates:logic.daysInSelectedMonth
 		leadingAdjacentDates:logic.daysInFinalWeekOfPreviousMonth
 	   trailingAdjacentDates:logic.daysInFirstWeekOfFollowingMonth];
@@ -214,12 +216,16 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)showPreviousWeek
 {
-	[frontMonthView showPreviousWeek];
+//	[frontMonthView showPreviousWeek];
+	if (!transitioning)
+		[self slide:SLIDE_LEFT]; 
 }
 
 - (void)showFollowingWeek
 {
-	[frontMonthView showFollowingWeek];
+//	[frontMonthView showFollowingWeek];
+	if (!transitioning)
+		[self slide:SLIDE_RIGHT]; 
 }
 
 - (void)showFollowingMonth

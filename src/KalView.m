@@ -99,7 +99,9 @@ static const CGFloat kMonthLabelHeight = 17.f;
 {
 	if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
 		if (gridView.isShowingWeekView) {
-			[self showFollowingWeek];
+			if (!gridView.transitioning) {
+				[delegate showFollowingWeek];
+			}
 		}else {
 			if (!gridView.transitioning) {
 				[delegate showFollowingMonth];
@@ -107,7 +109,9 @@ static const CGFloat kMonthLabelHeight = 17.f;
 		}
 	}else if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
 		if (gridView.isShowingWeekView) {
-			[self showPreviousWeek];
+			if (!gridView.transitioning) {
+				[delegate showPreviousWeek];
+			}
 		}else {
 			if (!gridView.transitioning) {
 				[delegate showPreviousMonth];

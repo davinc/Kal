@@ -18,12 +18,13 @@
 @property (nonatomic, retain) NSArray *daysInSelectedMonth;
 @property (nonatomic, retain) NSArray *daysInFinalWeekOfPreviousMonth;
 @property (nonatomic, retain) NSArray *daysInFirstWeekOfFollowingMonth;
+@property (nonatomic, retain) NSArray *daysInSelectedWeek;
 
 @end
 
 @implementation KalLogic
 
-@synthesize baseDate, fromDate, toDate, daysInSelectedMonth, daysInFinalWeekOfPreviousMonth, daysInFirstWeekOfFollowingMonth, daysInSelectedWeek, daysInFinalWeekOfPreviousWeek, daysInFirstWeekOfFollowingWeek;
+@synthesize baseDate, fromDate, toDate, daysInSelectedMonth, daysInFinalWeekOfPreviousMonth, daysInFirstWeekOfFollowingMonth, daysInSelectedWeek, logicMode;
 
 + (NSSet *)keyPathsForValuesAffectingSelectedMonthNameAndYear
 {
@@ -33,6 +34,8 @@
 - (id)initForDate:(NSDate *)date
 {
 	if ((self = [super init])) {
+		logicMode = KalLogicMonthMode;
+		
 		monthAndYearFormatter = [[NSDateFormatter alloc] init];
 		[monthAndYearFormatter setDateFormat:@"LLLL yyyy"];
 		[self moveToMonthForDate:date];
@@ -47,8 +50,18 @@
 
 - (void)moveToMonthForDate:(NSDate *)date
 {
-	self.baseDate = [date cc_dateByMovingToFirstDayOfTheMonth];
-	[self recalculateVisibleDays];
+	if (logicMode == KalLogicMonthMode) {
+		self.baseDate = [date cc_dateByMovingToFirstDayOfTheMonth];
+		[self recalculateVisibleDays];
+	}
+}
+
+- (void)moveToWeekForDate:(NSDate *)date
+{
+	if (logicMode == KalLogicWeekMode) {
+		self.baseDate = [date cc_dateByMovingToFirstDayOfTheWeek];
+		[self recalculateVisibleDays];
+	}
 }
 
 - (void)retreatToPreviousMonth
@@ -59,6 +72,16 @@
 - (void)advanceToFollowingMonth
 {
 	[self moveToMonthForDate:[self.baseDate cc_dateByMovingToFirstDayOfTheFollowingMonth]];
+}
+
+- (void)retreatToPreviousWeek
+{
+	[self moveToWeekForDate:[self.baseDate cc_dateByMovingToFirstDayOfThePreviousWeek]];
+}
+
+- (void)advanceToFollowingWeek
+{
+	[self moveToWeekForDate:[self.baseDate cc_dateByMovingToFirstDayOfTheFollowingWeek]];
 }
 
 - (NSString *)selectedMonthNameAndYear
@@ -120,15 +143,34 @@
 	return days;
 }
 
+- (NSArray *)calculateDaysInSelectedWeek
+{
+	NSMutableArray *days = [NSMutableArray array];
+	
+	NSUInteger numDays = 7;
+	for (int i = 0; i < numDays; i++)
+		[days addObject:[KalDate dateFromNSDate:[self.baseDate dateByAddingTimeInterval:60*60*24*i]]];
+	
+	return days;
+}
+
 - (void)recalculateVisibleDays
 {
-	self.daysInSelectedMonth = [self calculateDaysInSelectedMonth];
-	self.daysInFinalWeekOfPreviousMonth = [self calculateDaysInFinalWeekOfPreviousMonth];
-	self.daysInFirstWeekOfFollowingMonth = [self calculateDaysInFirstWeekOfFollowingMonth];
-	KalDate *from = [self.daysInFinalWeekOfPreviousMonth count] > 0 ? [self.daysInFinalWeekOfPreviousMonth objectAtIndex:0] : [self.daysInSelectedMonth objectAtIndex:0];
-	KalDate *to = [self.daysInFirstWeekOfFollowingMonth count] > 0 ? [self.daysInFirstWeekOfFollowingMonth lastObject] : [self.daysInSelectedMonth lastObject];
-	self.fromDate = [[from NSDate] cc_dateByMovingToBeginningOfDay];
-	self.toDate = [[to NSDate] cc_dateByMovingToEndOfDay];
+	if (logicMode == KalLogicMonthMode) 
+	{
+		self.daysInSelectedMonth = [self calculateDaysInSelectedMonth];
+		self.daysInFinalWeekOfPreviousMonth = [self calculateDaysInFinalWeekOfPreviousMonth];
+		self.daysInFirstWeekOfFollowingMonth = [self calculateDaysInFirstWeekOfFollowingMonth];
+		KalDate *from = [self.daysInFinalWeekOfPreviousMonth count] > 0 ? [self.daysInFinalWeekOfPreviousMonth objectAtIndex:0] : [self.daysInSelectedMonth objectAtIndex:0];
+		KalDate *to = [self.daysInFirstWeekOfFollowingMonth count] > 0 ? [self.daysInFirstWeekOfFollowingMonth lastObject] : [self.daysInSelectedMonth lastObject];
+		self.fromDate = [[from NSDate] cc_dateByMovingToBeginningOfDay];
+		self.toDate = [[to NSDate] cc_dateByMovingToEndOfDay];
+	}else if (logicMode == KalLogicWeekMode) 
+	{
+		self.daysInSelectedWeek = [self calculateDaysInSelectedWeek];
+		self.fromDate = [self.baseDate cc_dateByMovingToBeginningOfDay];
+		self.toDate = [[self.fromDate dateByAddingTimeInterval:60*60*24*6] cc_dateByMovingToEndOfDay];
+	}
 }
 
 #pragma mark -
@@ -143,8 +185,6 @@
 	[daysInFinalWeekOfPreviousMonth release];
 	[daysInFirstWeekOfFollowingMonth release];
 	[daysInSelectedWeek release];
-	[daysInFinalWeekOfPreviousWeek release];
-	[daysInFirstWeekOfFollowingWeek release];
 	[super dealloc];
 }
 

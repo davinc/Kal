@@ -19,4 +19,7 @@
 - (NSUInteger)cc_weekday;
 - (NSUInteger)cc_numberOfDaysInMonth;
 
+- (NSDate *)cc_dateByMovingToFirstDayOfTheWeek;
+- (NSDate *)cc_dateByMovingToFirstDayOfThePreviousWeek;
+- (NSDate *)cc_dateByMovingToFirstDayOfTheFollowingWeek;
 @end

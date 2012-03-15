@@ -20,6 +20,13 @@
  *  month.
  *
  */
+
+enum KalLogicMode {
+	KalLogicMonthMode = 0,
+	KalLogicWeekMode = 1
+};
+typedef NSInteger KalLogicMode;
+
 @interface KalLogic : NSObject
 {
 	NSDate *baseDate;
@@ -28,6 +35,7 @@
 	NSArray *daysInSelectedMonth;
 	NSArray *daysInFinalWeekOfPreviousMonth;
 	NSArray *daysInFirstWeekOfFollowingMonth;
+	NSArray *daysInSelectedWeek;
 	NSDateFormatter *monthAndYearFormatter;
 }
 
@@ -37,15 +45,18 @@
 @property (nonatomic, retain, readonly) NSArray *daysInSelectedMonth;             // array of KalDate
 @property (nonatomic, retain, readonly) NSArray *daysInFinalWeekOfPreviousMonth;  // array of KalDate
 @property (nonatomic, retain, readonly) NSArray *daysInFirstWeekOfFollowingMonth; // array of KalDate
-@property (nonatomic, retain, readonly) NSArray *daysInSelectedWeek;             // array of KalDate
-@property (nonatomic, retain, readonly) NSArray *daysInFinalWeekOfPreviousWeek;  // array of KalDate
-@property (nonatomic, retain, readonly) NSArray *daysInFirstWeekOfFollowingWeek; // array of KalDate
+@property (nonatomic, retain, readonly) NSArray *daysInSelectedWeek;              // array of KalDate
 @property (nonatomic, readonly) NSString *selectedMonthNameAndYear; // localized (e.g. "September 2010" for USA locale)
+@property (nonatomic, assign) KalLogicMode logicMode;
 
 - (id)initForDate:(NSDate *)date; // designated initializer.
 
 - (void)retreatToPreviousMonth;
 - (void)advanceToFollowingMonth;
 - (void)moveToMonthForDate:(NSDate *)date;
+
+- (void)retreatToPreviousWeek;
+- (void)advanceToFollowingWeek;
+- (void)moveToWeekForDate:(NSDate *)date;
 
 @end
