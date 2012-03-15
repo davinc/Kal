@@ -63,7 +63,7 @@
 			if ([view isKindOfClass:[KalWeekView class]]) {
 				KalWeekView *weekView = (KalWeekView *)view;
 				weekView.weekIndex = weekTileNum;
-				[weekView setTitleText:[NSString stringWithFormat:@"Wk%d", weekTileNum+1]];
+				[weekView setTitleText:[NSString stringWithFormat:@"Week%d", weekTileNum+1]];
 				
 				KalDayTileView *dayTile = [weekView.dayTiles objectAtIndex:dayTileNum];
 				

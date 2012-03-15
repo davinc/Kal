@@ -41,8 +41,9 @@
 		headerLabel.backgroundColor = [UIColor clearColor];
 		headerLabel.textColor = [UIColor colorWithRed:0.3f green:0.3f blue:0.3f alpha:1.f];
 		headerLabel.shadowColor = [UIColor whiteColor];
-		headerLabel.shadowOffset = CGSizeMake(0, 1);
-		[self addSubview:headerLabel];
+		headerLabel.shadowOffset = CGSizeMake(-1, 0);
+		headerLabel.transform = CGAffineTransformMakeRotation( -M_PI/2 );
+		[self addSubview:headerLabel];		
     }
     return self;
 }
