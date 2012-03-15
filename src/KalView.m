@@ -245,6 +245,8 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
 - (void)selectDate:(KalDate *)date { [gridView selectDate:date]; }
 
+- (void)selectDates:(NSArray *)dates { [gridView selectDates:dates]; }
+
 - (BOOL)isSliding { return gridView.transitioning; }
 
 //- (void)markTilesForDates:(NSArray *)dates { [gridView markTilesForDates:dates]; }

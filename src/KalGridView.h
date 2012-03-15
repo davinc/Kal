@@ -24,8 +24,7 @@
 	KalLogic *logic;
 	KalMonthView *frontMonthView;
 	KalMonthView *backMonthView;
-	//  KalTileView *selectedTile;
-	//  KalTileView *highlightedTile;
+	KalDayTileView *highlightedTile;
 	BOOL transitioning;
 }
 
@@ -35,6 +34,7 @@
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
 - (void)selectDate:(KalDate *)date;
+- (void)selectDates:(NSArray *)dates;
 //- (void)markTilesForDates:(NSArray *)dates;
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 
