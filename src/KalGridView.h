@@ -35,7 +35,7 @@
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
 - (void)selectDate:(KalDate *)date;
-- (void)markTilesForDates:(NSArray *)dates;
+//- (void)markTilesForDates:(NSArray *)dates;
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 
 // These 3 methods should be called *after* the KalLogic

@@ -9,17 +9,19 @@
 
 @interface KalMonthView : UIView
 {
-	NSUInteger numWeeks;
+	unsigned int numberOfWeeks;
 	BOOL isShowingWeekView;
-	NSInteger showingWeekOfMonth;
+	unsigned int showingWeekOfMonth;
 }
 
 @property (nonatomic) BOOL isShowingWeekView;
+@property (nonatomic, readonly) unsigned int numberOfWeeks;
+@property (nonatomic) unsigned int showingWeekOfMonth;
 
 - (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *)trailingAdjacentDates;
 - (KalDayTileView *)firstTileOfMonth;
 - (KalDayTileView *)tileForDate:(KalDate *)date;
-- (void)markTilesForDates:(NSArray *)dates;
+//- (void)markTilesForDates:(NSArray *)dates;
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 
 - (void)showWeekViewForWeekAtIndex:(NSInteger)index;

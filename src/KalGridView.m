@@ -146,10 +146,10 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 		// show that week
 		
 		if (frontMonthView.isShowingWeekView) {
-			logic.logicMode = KalLogicMonthMode;
+//			logic.logicMode = KalLogicMonthMode;
 			[frontMonthView hideWeekView];
 		}else {
-			logic.logicMode = KalLogicWeekMode;
+//			logic.logicMode = KalLogicWeekMode;
 			[frontMonthView showWeekViewForWeekAtIndex:weekView.weekIndex];
 		}
 	}
@@ -161,6 +161,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)swapMonthsAndSlide:(int)direction keepOneRow:(BOOL)keepOneRow
 {
+	transitioning = YES;
+
 	backMonthView.hidden = NO;
 	
 	// set initial positions before the slide
@@ -195,8 +197,6 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)slide:(int)direction
 {
-	transitioning = YES;
-	backMonthView.isShowingWeekView = frontMonthView.isShowingWeekView;
 	[backMonthView showDates:logic.daysInSelectedMonth
 		leadingAdjacentDates:logic.daysInFinalWeekOfPreviousMonth
 	   trailingAdjacentDates:logic.daysInFirstWeekOfFollowingMonth];
@@ -205,6 +205,19 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 	// following/previous month, so in order to determine whether there are 
 	// any cells to keep, we need to check for a partial week in the month
 	// that is sliding offscreen.
+	if (frontMonthView.isShowingWeekView) {
+		NSInteger weekIndex = frontMonthView.showingWeekOfMonth;
+		weekIndex = weekIndex + (direction == SLIDE_LEFT?-1:1);
+		
+		if (weekIndex < 0 && direction == SLIDE_LEFT) {
+			return;
+		}
+		if (backMonthView.numberOfWeeks-1 < weekIndex && direction == SLIDE_RIGHT) {
+			return;
+		}
+		
+		[backMonthView showWeekViewForWeekAtIndex:weekIndex];
+	}
 	
 	BOOL keepOneRow = (direction == SLIDE_UP && [logic.daysInFinalWeekOfPreviousMonth count] > 0)
 	|| (direction == SLIDE_DOWN && [logic.daysInFirstWeekOfFollowingMonth count] > 0);
@@ -268,7 +281,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (BOOL)isShowingWeekView { return frontMonthView.isShowingWeekView; }
 
-- (void)markTilesForDates:(NSArray *)dates { [frontMonthView markTilesForDates:dates]; }
+//- (void)markTilesForDates:(NSArray *)dates { [frontMonthView markTilesForDates:dates]; }
 
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList { [frontMonthView markTilesWithAnnoatations:annotationsList]; }
 

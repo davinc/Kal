@@ -16,6 +16,8 @@
 @implementation KalMonthView
 
 @synthesize isShowingWeekView;
+@synthesize showingWeekOfMonth;
+@synthesize numberOfWeeks;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -32,10 +34,10 @@
 
 - (void)layoutSubviews
 {
-	if (numWeeks == 0 || isShowingWeekView) {
+	if (numberOfWeeks == 0 || isShowingWeekView) {
 		return;
 	}
-	CGSize tileSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height/numWeeks);
+	CGSize tileSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height/numberOfWeeks);
 	
 	for (int i=0; i<6; i++) 
 	{
@@ -78,7 +80,7 @@
 		}
 	}
 	
-	numWeeks = ceilf(tileNum / 7.f);
+	numberOfWeeks = ceilf(tileNum / 7.f);
 	[self sizeToFit];
 	[self setNeedsLayout];
 }
@@ -116,8 +118,8 @@
 	return tile;
 }
 
-- (void)markTilesForDates:(NSArray *)dates
-{
+//- (void)markTilesForDates:(NSArray *)dates
+//{
 //	for (UIView *view in self.subviews)
 //	{
 //		if ([view isKindOfClass:[KalDayTileView class]]) {
@@ -125,7 +127,7 @@
 //			tile.marked = [dates containsObject:tile.date];
 //		}
 //	}
-}
+//}
 
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList
 {
@@ -181,7 +183,7 @@
 
 - (void)showFollowingWeek
 {
-	if (showingWeekOfMonth < numWeeks-1) {
+	if (showingWeekOfMonth < numberOfWeeks-1) {
 		[self showWeekViewForWeekAtIndex:showingWeekOfMonth+1];
 	}
 }
