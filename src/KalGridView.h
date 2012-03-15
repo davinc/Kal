@@ -29,7 +29,7 @@
 }
 
 @property (nonatomic, readonly) BOOL transitioning;
-@property (nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, readonly) NSArray *selectedDates;
 @property (nonatomic, readonly) BOOL isShowingWeekView;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;

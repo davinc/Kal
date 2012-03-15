@@ -146,7 +146,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 	
 	NSArray *dayAnnotations = [theDataSource dayAnnotationsFrom:logic.fromDate to:logic.toDate];
 	[[self calendarView] markTilesWithAnnoatations:dayAnnotations];
-	[self didSelectDate:self.calendarView.selectedDate];
+//	[self didSelectDate:self.calendarView.selectedDate];
 }
 
 // ---------------------------------------
@@ -177,11 +177,26 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 	[self reloadData];
 }
 
-- (NSDate *)selectedDate
+- (NSArray *)selectedDates
 {
-	return [self.calendarView.selectedDate NSDate];
+	NSMutableArray *selectedDates = [NSMutableArray array];
+	for (KalDate *date in self.calendarView.selectedDates) {
+		[selectedDates addObject:[date NSDate]];
+	}
+	
+	return selectedDates;
 }
 
+- (void)selectDates:(NSArray *)dates
+{
+	NSMutableArray *selectedDates = [NSMutableArray array];
+	
+	for (NSDate *date in dates) {
+		[selectedDates addObject:[KalDate dateFromNSDate:date]];
+	}
+	
+	[[self calendarView] selectDates:selectedDates];
+}
 
 // -----------------------------------------------------------------------------------
 #pragma mark UIViewController

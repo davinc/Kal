@@ -42,13 +42,12 @@
 }
 
 @property (nonatomic, assign) id<KalViewDelegate> delegate;
-@property (nonatomic, readonly) KalDate *selectedDate;
+@property (nonatomic, readonly) NSArray *selectedDates;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
 - (BOOL)isSliding;
 - (void)selectDate:(KalDate *)date;
 - (void)selectDates:(NSArray *)dates;
-//- (void)markTilesForDates:(NSArray *)dates;
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 - (void)redrawEntireMonth;
 

@@ -291,7 +291,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList { [frontMonthView markTilesWithAnnoatations:annotationsList]; }
 
-- (KalDate *)selectedDate 
+- (NSArray *)selectedDates
 {
 	//	return selectedTile.date; 
 	return nil;

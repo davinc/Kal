@@ -253,7 +253,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
 
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList { [gridView markTilesWithAnnoatations:annotationsList]; }
 
-- (KalDate *)selectedDate { return gridView.selectedDate; }
+- (NSArray *)selectedDates { return gridView.selectedDates; }
 
 - (void)dealloc
 {
