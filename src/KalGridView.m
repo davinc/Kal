@@ -205,6 +205,8 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 		if (frontMonthView.numberOfWeeks-1 < weekIndex && direction == SLIDE_RIGHT) {
 			return;
 		}
+	}else {
+		backMonthView.isShowingWeekView = NO;
 	}
 	
 	[backMonthView showDates:logic.daysInSelectedMonth
