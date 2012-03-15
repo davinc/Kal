@@ -243,14 +243,18 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)showFollowingMonth
 {
-	if (!transitioning)
+	if (!transitioning) {
+		frontMonthView.isShowingWeekView = NO;
 		[self slide:SLIDE_RIGHT]; 
+	}
 }
 
 - (void)showPreviousMonth 
 { 
-	if (!transitioning)
+	if (!transitioning) {
+		frontMonthView.isShowingWeekView = NO;
 		[self slide:SLIDE_LEFT]; 
+	}
 }
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
