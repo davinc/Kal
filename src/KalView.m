@@ -20,6 +20,7 @@ static const CGFloat kMonthLabelHeight = 17.f;
 @implementation KalView
 
 @synthesize delegate;
+@synthesize allowsMultipleSelection;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)theDelegate logic:(KalLogic *)theLogic
 {
@@ -254,6 +255,9 @@ static const CGFloat kMonthLabelHeight = 17.f;
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList { [gridView markTilesWithAnnoatations:annotationsList]; }
 
 - (NSArray *)selectedDates { return gridView.selectedDates; }
+
+- (BOOL)allowsMultipleSelection { return gridView.allowsMultipleSelection; }
+- (void)setAllowsMultipleSelection:(BOOL)multipleSelection { [gridView setAllowsMultipleSelection:multipleSelection]; }
 
 - (void)dealloc
 {

@@ -25,12 +25,14 @@
 	KalMonthView *frontMonthView;
 	KalMonthView *backMonthView;
 	KalDayTileView *highlightedTile;
+	KalDayTileView *selectedTile;
 	BOOL transitioning;
 }
 
 @property (nonatomic, readonly) BOOL transitioning;
 @property (nonatomic, readonly) NSArray *selectedDates;
 @property (nonatomic, readonly) BOOL isShowingWeekView;
+@property (nonatomic) BOOL allowsMultipleSelection;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
 - (void)selectDate:(KalDate *)date;

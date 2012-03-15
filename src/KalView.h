@@ -43,6 +43,7 @@
 
 @property (nonatomic, assign) id<KalViewDelegate> delegate;
 @property (nonatomic, readonly) NSArray *selectedDates;
+@property (nonatomic) BOOL allowsMultipleSelection;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
 - (BOOL)isSliding;

@@ -94,6 +94,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 - (void)didSelectDate:(KalDate *)date
 {
+	NSLog(@"Date selected: %d/%d/%d", date.day, date.month, date.year);
 	self.selectedDate = [date NSDate];
 	NSDate *from = [[date NSDate] cc_dateByMovingToBeginningOfDay];
 	NSDate *to = [[date NSDate] cc_dateByMovingToEndOfDay];
@@ -144,8 +145,8 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 //		[dates replaceObjectAtIndex:i withObject:[KalDate dateFromNSDate:[dates objectAtIndex:i]]];
 //	[[self calendarView] markTilesForDates:dates];
 	
-	NSArray *dayAnnotations = [theDataSource dayAnnotationsFrom:logic.fromDate to:logic.toDate];
-	[[self calendarView] markTilesWithAnnoatations:dayAnnotations];
+//	NSArray *dayAnnotations = [theDataSource dayAnnotationsFrom:logic.fromDate to:logic.toDate];
+//	[[self calendarView] markTilesWithAnnoatations:dayAnnotations];
 //	[self didSelectDate:self.calendarView.selectedDate];
 }
 

@@ -24,18 +24,21 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 @interface KalGridView ()
 @property (nonatomic, retain) KalDayTileView *highlightedTile;
+@property (nonatomic, retain) KalDayTileView *selectedTile;
 - (void)swapMonthViews;
 @end
 
 @implementation KalGridView
 
-@synthesize highlightedTile;
+@synthesize highlightedTile, selectedTile;
 @synthesize transitioning;
+@synthesize allowsMultipleSelection;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)theLogic delegate:(id<KalViewDelegate>)theDelegate
 {	
 	if (self = [super initWithFrame:frame]) {
 		self.clipsToBounds = YES;
+		self.allowsMultipleSelection = NO;
 		logic = [theLogic retain];
 		delegate = theDelegate;
 		
@@ -77,16 +80,30 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 		[tile setNeedsDisplay];
 	}
 }
-//
-//- (void)setSelectedTile:(KalTileView *)tile
-//{
-//  if (selectedTile != tile) {
-//    selectedTile.selected = NO;
-//    selectedTile = [tile retain];
-//    tile.selected = YES;
-//    [delegate didSelectDate:tile.date];
-//  }
-//}
+
+- (void)setSelectedTile:(KalDayTileView *)tile
+{
+	if (allowsMultipleSelection) 
+	{
+		// should work like toggle
+		tile.selected = !tile.selected;
+		[selectedTile release], selectedTile = nil;
+	}else 
+	{
+		// should deselect previous
+		if (selectedTile != tile) {
+			selectedTile.selected = NO;
+			[selectedTile release], selectedTile = nil;
+			selectedTile = [tile retain];
+			selectedTile.selected = YES;
+			[tile setNeedsDisplay];
+		}
+	}
+
+	if (tile.selected) {
+		[delegate didSelectDate:tile.date];
+	}
+}
 
 - (void)receivedTouches:(NSSet *)touches withEvent:event
 {
@@ -133,8 +150,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 			//      }
 			//      self.selectedTile = [frontMonthView tileForDate:tile.date];
 		} else {
-			//      self.selectedTile = tile;
-			tile.selected = !tile.selected;
+			[self setSelectedTile:tile];
 		}
 	}else if ([hitView isKindOfClass:[KalWeekView class]]) {
 		// Call back for weekview
@@ -267,14 +283,17 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)selectDate:(KalDate *)date
 {
-	//  self.selectedTile = [frontMonthView tileForDate:date];
+	KalDayTileView *tile = [frontMonthView tileForDate:date];
+	[self setSelectedTile:tile];
 }
 
 - (void)selectDates:(NSArray *)dates
 {
-	for (KalDate *date in dates) {
-		KalDayTileView *tile = [frontMonthView tileForDate:date];
-		tile.selected = YES;
+	if (allowsMultipleSelection) {
+		for (KalDate *date in dates) {
+			KalDayTileView *tile = [frontMonthView tileForDate:date];
+			tile.selected = YES;
+		}
 	}
 }
 
@@ -307,6 +326,7 @@ static NSString *kSlideAnimationId = @"KalSwitchMonths";
 
 - (void)dealloc
 {
+	[selectedTile release];
 	[highlightedTile release];
 	[frontMonthView release];
 	[backMonthView release];

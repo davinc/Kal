@@ -69,16 +69,6 @@
 	[kal selectDates:dates];
 }
 
-#pragma mark UITableViewDelegate protocol conformance
-
-// Display a details screen for the selected holiday/row.
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	Holiday *holiday = [dataSource holidayAtIndexPath:indexPath];
-	HolidaysDetailViewController *vc = [[[HolidaysDetailViewController alloc] initWithHoliday:holiday] autorelease];
-	[navController pushViewController:vc animated:YES];
-}
-
 #pragma mark -
 
 - (void)dealloc
