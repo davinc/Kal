@@ -8,6 +8,7 @@
 #import "KalPrivate.h"
 #import "KalAnnotationView.h"
 #import "KalDayAnnotations.h"
+#import "KalCheckBox.h"
 
 @interface KalDayTileView ()
 
@@ -22,10 +23,9 @@
 - (id)initWithFrame:(CGRect)frame
 {
 	if ((self = [super initWithFrame:frame])) {
-		self.opaque = NO;
-		self.backgroundColor = [UIColor clearColor];
-		self.clipsToBounds = NO;
-		self.contentMode = UIViewContentModeRedraw;
+		self.opaque = YES;
+		self.clipsToBounds = YES;
+		self.backgroundColor = [UIColor lightGrayColor];
 		[self resetState];
 
 		backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -39,6 +39,9 @@
 		dateLabel.backgroundColor = [UIColor clearColor];
 		[self addSubview:dateLabel];
 		
+		checkbox = [[KalCheckBox alloc] initWithFrame:self.bounds];
+		[self addSubview:checkbox];
+
 		[self updateStyle];
 	}
 	return self;
@@ -49,9 +52,8 @@
 	[date release];
 	date = nil;
 	flags.type = KalTileTypeRegular;
-	flags.highlighted = NO;
 	flags.selected = NO;
-	flags.marked = NO;
+	flags.showCheckbox = NO;
 	[self updateStyle];
 }
 
@@ -60,6 +62,7 @@
 	backgroundImageView.frame = self.bounds;
 	annotationView.frame = CGRectMake(5, 15, self.bounds.size.width - 10, self.bounds.size.height - 20);
 	dateLabel.frame = CGRectMake(3, 1, self.bounds.size.width-3, 15);
+	checkbox.frame = self.bounds;
 	
 	[annotationView setNeedsDisplay];
 }
@@ -67,20 +70,20 @@
 - (void)updateStyle
 {
 	if ([self isToday] && self.selected) {
-		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile_today_selected.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:20];
-		dateLabel.textColor = [UIColor whiteColor];
-		dateLabel.shadowColor = [UIColor blackColor];
-		dateLabel.shadowOffset = CGSizeMake(0, 1);
+//		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile_today_selected.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:20];
+//		dateLabel.textColor = [UIColor whiteColor];
+//		dateLabel.shadowColor = [UIColor blackColor];
+//		dateLabel.shadowOffset = CGSizeMake(0, 1);
 	} else if ([self isToday] && !self.selected) {
 		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile_today.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:20];
 		dateLabel.textColor = [UIColor whiteColor];
 		dateLabel.shadowColor = [UIColor blackColor];
 		dateLabel.shadowOffset = CGSizeMake(0, 1);
 	} else if (self.selected) {
-		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile_selected.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:20];
-		dateLabel.textColor = [UIColor whiteColor];
-		dateLabel.shadowColor = [UIColor blackColor];
-		dateLabel.shadowOffset = CGSizeMake(0, -1);
+//		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile_selected.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:20];
+//		dateLabel.textColor = [UIColor whiteColor];
+//		dateLabel.shadowColor = [UIColor blackColor];
+//		dateLabel.shadowOffset = CGSizeMake(0, -1);
 	} else if (self.belongsToAdjacentMonth) {
 		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile.png"] stretchableImageWithLeftCapWidth:4 topCapHeight:4];
 		dateLabel.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_dim_text_fill.png"]];
@@ -88,10 +91,13 @@
 		dateLabel.shadowOffset = CGSizeZero;
 	} else {
 		backgroundImageView.image = [[UIImage imageNamed:@"Kal.bundle/kal_tile.png"] stretchableImageWithLeftCapWidth:4 topCapHeight:4];
-		dateLabel.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_text_fill.png"]];
+//		dateLabel.textColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Kal.bundle/kal_tile_text_fill.png"]];
+		dateLabel.textColor = [UIColor blackColor];
 		dateLabel.shadowColor = [UIColor whiteColor];
 		dateLabel.shadowOffset = CGSizeMake(0, 1);
 	}
+	
+	checkbox.hidden = !flags.showCheckbox;
 }
 
 - (void)setDate:(KalDate *)aDate
@@ -115,28 +121,7 @@
 		return;
 	
 	flags.selected = selected;
-	[self updateStyle];
-}
-
-- (BOOL)isHighlighted { return flags.highlighted; }
-
-- (void)setHighlighted:(BOOL)highlighted
-{
-	if (flags.highlighted == highlighted)
-		return;
-	
-	flags.highlighted = highlighted;
-	[self updateStyle];
-}
-
-- (BOOL)isMarked { return flags.marked; }
-
-- (void)setMarked:(BOOL)marked
-{
-	if (flags.marked == marked)
-		return;
-	
-	flags.marked = marked;
+	checkbox.checked = selected;
 	[self updateStyle];
 }
 
@@ -148,6 +133,19 @@
 		return;
 	flags.type = tileType;
 	
+	[self updateStyle];
+}
+
+- (BOOL)isShowingCheckbox { return flags.showCheckbox; }
+
+- (void)setShowCheckbox:(BOOL)showCheckbox
+{
+	NSLog(@"%i", showCheckbox);
+	if (flags.showCheckbox == showCheckbox) {
+		return;
+	}
+	flags.showCheckbox = showCheckbox;
+	checkbox.checked = NO;
 	[self updateStyle];
 }
 
@@ -168,6 +166,7 @@
 	[dateLabel release];
 	[backgroundImageView release];
 	[annotationView release];
+	[checkbox release];
 	[super dealloc];
 }
 

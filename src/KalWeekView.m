@@ -21,8 +21,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-		self.opaque = NO;
+		self.opaque = YES;
 		self.clipsToBounds = YES;
+		self.backgroundColor = [UIColor lightGrayColor];
+		
 		dayTiles = [[NSMutableArray alloc] init];
 		for (int j=0; j<7; j++) {
 			KalDayTileView *tile = [[KalDayTileView alloc] initWithFrame:CGRectZero];

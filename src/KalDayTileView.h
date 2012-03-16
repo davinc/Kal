@@ -15,6 +15,7 @@ typedef char KalTileType;
 @class KalDate;
 @class KalAnnotationView;
 @class KalDayAnnotations;
+@class KalCheckBox;
 
 @interface KalDayTileView : UIView
 {
@@ -22,18 +23,17 @@ typedef char KalTileType;
 	UIImageView *backgroundImageView;
 	UILabel *dateLabel;
 	KalAnnotationView *annotationView;
+	KalCheckBox *checkbox;
 	struct {
 		unsigned int selected : 1;
-		unsigned int highlighted : 1;
-		unsigned int marked : 1;
+		unsigned int showCheckbox : 1;
 		unsigned int type : 2;
 	} flags;
 }
 
 @property (nonatomic, retain) KalDate *date;
-@property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (nonatomic, getter=isSelected) BOOL selected;
-@property (nonatomic, getter=isMarked) BOOL marked;
+@property (nonatomic, getter=isShowingCheckbox) BOOL showCheckbox;
 @property (nonatomic) KalTileType type;
 
 - (void)resetState;

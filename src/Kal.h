@@ -36,6 +36,16 @@
 
 #import "KalViewController.h"
 #import "KalDataSource.h"
+#import "KalLogic.h"
+#import "KalDate.h"
+#import "KalView.h"
+#import "KalGridView.h"
+#import "KalMonthView.h"
+#import "KalWeekView.h"
+#import "KalDayTileView.h"
+#import "KalDayAnnotations.h"
+#import "KalAnnotation.h"
+#import "KalDataSource.h"
 
 // The KalDataSource implementation should post this notification
 // whenever its content has changed. Kal uses this notification to

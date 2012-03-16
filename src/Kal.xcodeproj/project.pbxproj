@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4518F00D15138BE30059EAF6 /* KalCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 4518F00B15138BE30059EAF6 /* KalCheckBox.h */; };
+		4518F00E15138BE30059EAF6 /* KalCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4518F00C15138BE30059EAF6 /* KalCheckBox.m */; };
 		456EDD581510862A006BA594 /* KalDayAnnotations.h in Headers */ = {isa = PBXBuildFile; fileRef = 456EDD561510862A006BA594 /* KalDayAnnotations.h */; };
 		456EDD591510862A006BA594 /* KalDayAnnotations.m in Sources */ = {isa = PBXBuildFile; fileRef = 456EDD571510862A006BA594 /* KalDayAnnotations.m */; };
 		456EDD5D1510863B006BA594 /* KalAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 456EDD5B1510863B006BA594 /* KalAnnotation.h */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4518F00B15138BE30059EAF6 /* KalCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalCheckBox.h; sourceTree = "<group>"; };
+		4518F00C15138BE30059EAF6 /* KalCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalCheckBox.m; sourceTree = "<group>"; };
 		456EDD561510862A006BA594 /* KalDayAnnotations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalDayAnnotations.h; sourceTree = "<group>"; };
 		456EDD571510862A006BA594 /* KalDayAnnotations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KalDayAnnotations.m; sourceTree = "<group>"; };
 		456EDD5B1510863B006BA594 /* KalAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KalAnnotation.h; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4518F00B15138BE30059EAF6 /* KalCheckBox.h */,
+				4518F00C15138BE30059EAF6 /* KalCheckBox.m */,
 				533B286011E2D46E00B3CC07 /* Kal.h */,
 				533B286B11E2D46E00B3CC07 /* KalPrivate.h */,
 				533B286111E2D46E00B3CC07 /* KalDataSource.h */,
@@ -195,6 +201,7 @@
 				456EDD581510862A006BA594 /* KalDayAnnotations.h in Headers */,
 				456EDD5D1510863B006BA594 /* KalAnnotation.h in Headers */,
 				456EDD651510891F006BA594 /* KalAnnotationView.h in Headers */,
+				4518F00D15138BE30059EAF6 /* KalCheckBox.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +269,7 @@
 				456EDD591510862A006BA594 /* KalDayAnnotations.m in Sources */,
 				456EDD5E1510863B006BA594 /* KalAnnotation.m in Sources */,
 				456EDD661510891F006BA594 /* KalAnnotationView.m in Sources */,
+				4518F00E15138BE30059EAF6 /* KalCheckBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

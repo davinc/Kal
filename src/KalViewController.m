@@ -92,8 +92,9 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 // -----------------------------------------
 #pragma mark KalViewDelegate protocol
 
-- (void)didSelectDate:(KalDate *)date
+- (void)didSelectDate:(NSDate *)day
 {
+	KalDate *date = [KalDate dateFromNSDate:day];
 	NSLog(@"Date selected: %d/%d/%d", date.day, date.month, date.year);
 	self.selectedDate = [date NSDate];
 	NSDate *from = [[date NSDate] cc_dateByMovingToBeginningOfDay];

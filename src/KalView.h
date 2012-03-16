@@ -42,13 +42,17 @@
 }
 
 @property (nonatomic, assign) id<KalViewDelegate> delegate;
+@property (nonatomic, retain) KalLogic *logic;
 @property (nonatomic, readonly) NSArray *selectedDates;
 @property (nonatomic) BOOL allowsMultipleSelection;
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<KalViewDelegate>)delegate logic:(KalLogic *)logic;
 - (BOOL)isSliding;
+
+- (void)selectNone;
 - (void)selectDate:(KalDate *)date;
 - (void)selectDates:(NSArray *)dates;
+
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 - (void)redrawEntireMonth;
 
@@ -72,6 +76,6 @@
 - (void)showFollowingMonth;
 - (void)showPreviousWeek;
 - (void)showFollowingWeek;
-- (void)didSelectDate:(KalDate *)date;
+- (void)didSelectDate:(NSDate *)date;
 
 @end

@@ -24,7 +24,6 @@
 	KalLogic *logic;
 	KalMonthView *frontMonthView;
 	KalMonthView *backMonthView;
-	KalDayTileView *highlightedTile;
 	KalDayTileView *selectedTile;
 	BOOL transitioning;
 }
@@ -35,9 +34,9 @@
 @property (nonatomic) BOOL allowsMultipleSelection;
 
 - (id)initWithFrame:(CGRect)frame logic:(KalLogic *)logic delegate:(id<KalViewDelegate>)delegate;
+- (void)selectNone;
 - (void)selectDate:(KalDate *)date;
 - (void)selectDates:(NSArray *)dates;
-//- (void)markTilesForDates:(NSArray *)dates;
 - (void)markTilesWithAnnoatations:(NSArray *)annotationsList;
 
 // These 3 methods should be called *after* the KalLogic
