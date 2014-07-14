@@ -48,6 +48,8 @@
 	
 	// Setup the navigation stack and display it.
 	navController = [[UINavigationController alloc] initWithRootViewController:kal];
+	navController.navigationBar.barStyle = UIBarStyleDefault;
+	navController.navigationBar.translucent = NO;
 	[window addSubview:navController.view];
 	[window makeKeyAndVisible];
 }

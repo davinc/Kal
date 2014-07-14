@@ -213,7 +213,12 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
 	if (!self.title)
 		self.title = @"Calendar";
-	KalView *kalView = [[[KalView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] delegate:self logic:logic] autorelease];
+	
+	CGRect rect = [[UIScreen mainScreen] applicationFrame];
+	rect.size.height -= self.navigationController.navigationBar.bounds.size.height;
+	
+	KalView *kalView = [[[KalView alloc] initWithFrame:rect delegate:self logic:logic] autorelease];
+	
 	self.view = kalView;
 	[kalView selectDate:[KalDate dateFromNSDate:self.initialDate]];
 	[self reloadData];
